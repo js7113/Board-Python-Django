@@ -17,6 +17,7 @@
     </div>
     {% endif %}
 
+    <td>{{ board.category }}</td>
     <h2 class="border-bottom py-2">{{ board.title }}</h2>
 
     <!-- 추천 -->
@@ -42,6 +43,7 @@
                 <div class="badge badge-light p-2 text-left">
                     <div class="mb-2">{{ board.user_id.username }}</div>
                     <div> {{ board.create_date }} </div>
+                    <div> 조회 {{ board.view_count }} </div>
                 </div>
             </div>
 

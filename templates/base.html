@@ -4,16 +4,33 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
     <title>Hello</title>
 </head>
 <body>
 
 {% include "navbar.html" %}
 
-{% block content %}
-{% endblock %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-sm-12 col-md-3 col-lg-2 p-2">
+            {% include "sidebar.html" %}
+        </div>
+        <div class="col-sm-12 col-md-9 col-lg-10 p-2">
+            <div id="content">
+                <div class="content_block">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include "footer.html" %}
 
 <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
 <script src="{% static 'bootstrap.min.js' %}"></script>

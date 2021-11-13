@@ -1,12 +1,12 @@
+from django.core import paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from ..models import Boards, Comment
-from ..forms import BoardForm, CommentForm
-from django.core.paginator import Paginator
+from ..models import Boards, Category
+from ..forms import BoardForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-@login_required(login_url='login:login')
+@login_required(login_url='accounts:login')
 def board_create(request):
     # 등록폼으로 처리
     if request.method == 'POST':
@@ -20,9 +20,12 @@ def board_create(request):
     # 게시글등록 버튼을 누를 경우
     else:
         form = BoardForm()
-    return render(request, 'base/board_form.html', {'form': form})
 
-@login_required(login_url='login:login')
+    context = {'form': form}
+    return render(request, 'base/board_form.html', context)
+
+
+@login_required(login_url='accounts:login')
 def board_modify(request, board_id):
     board = get_object_or_404(Boards, pk=board_id)
     if request.user != board.user_id:
@@ -41,7 +44,7 @@ def board_modify(request, board_id):
     context = {'form': form}
     return render(request, 'base/board_form.html', context)
 
-@login_required(login_url='login:login')
+@login_required(login_url='accounts:login')
 def board_delete(request, board_id):
     board = get_object_or_404(Boards, pk=board_id)
     if request.user != board.user_id:

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
+<div class="container" xmlns="http://www.w3.org/1999/html">
     <h5 class="my-3 border-bottom pb-2">글등록</h5>
     <form method="post" class="post-form my-3">
         {% csrf_token %}
@@ -17,11 +17,24 @@
             </div>
         {% endif %}
 
+        <div class="row justify-content-between my-3">
+            <div class="col-2">
+                <label for="category">분류</label>
+                <select class="form-control" name="category" id="category">
+                    <option value="" selected>---------</option>
+                    <option value="1">자유</option>
+                    <option value="2">정보</option>
+                    <option value="3">질문</option>
+                </select>
+            </div>
+        </div>
+
         <div class="form-group">
             <label for="title">제목</label>
             <input type="text" class="form-control" name="title" id="title"
                    value="{{ form.title.value|default_if_none:'' }}">
         </div>
+
         <div class="form-group">
             <label for="content">내용</label>
             <textarea class="form-control" name="content"
@@ -31,4 +44,5 @@
         <button type="submit" class="btn btn-primary">저장하기</button>
     </form>
 </div>
+
 {% endblock %}

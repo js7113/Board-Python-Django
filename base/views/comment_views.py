@@ -1,12 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404, resolve_url
 from django.utils import timezone
 from ..models import Boards, Comment, Reply
-from ..forms import BoardForm, CommentForm, ReplyForm
-from django.core.paginator import Paginator
+from ..forms import CommentForm, ReplyForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-@login_required(login_url='login:login')
+@login_required(login_url='accounts:login')
 def comment_create(request, board_id):
     board = get_object_or_404(Boards, pk=board_id)
     if request.method == "POST":
@@ -24,7 +23,7 @@ def comment_create(request, board_id):
     context = {'board': board, 'form': form}
     return render(request, 'base/board_detail.html', context)
 
-@login_required(login_url='login:login')
+@login_required(login_url='accounts:login')
 def comment_modify(request, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id)
     if request.user != comment.user_id:
@@ -45,7 +44,7 @@ def comment_modify(request, comment_id):
     context = {'comment': comment, 'form': form}
     return render(request, 'base/comment_form.html', context)
 
-@login_required(login_url='login:login')
+@login_required(login_url='accounts:login')
 def comment_delete(request, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id)
     if request.user != comment.user_id:
@@ -54,7 +53,7 @@ def comment_delete(request, comment_id):
         comment.delete()
     return redirect('base:detail', board_id=comment.board.id)
 
-@login_required(login_url='login:login')
+@login_required(login_url='accounts:login')
 def reply_create(request, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id)
     if request.method == "POST":
@@ -74,7 +73,7 @@ def reply_create(request, comment_id):
     context = {'form': form}
     return render(request, 'base/reply_form.html', context)
 
-@login_required(login_url='login:login')
+@login_required(login_url='accounts:login')
 def reply_modify(request, reply_id):
     reply = get_object_or_404(Reply, pk=reply_id)
     if request.user != reply.user_id:
@@ -94,7 +93,7 @@ def reply_modify(request, reply_id):
     context = {'form': form}
     return render(request, 'base/comment_form.html', context)
 
-@login_required(login_url='login:login')
+@login_required(login_url='accounts:login')
 def reply_delete(request, reply_id):
     reply = get_object_or_404(Reply, pk=reply_id)
     if request.user != reply.user_id:

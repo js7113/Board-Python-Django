@@ -1,12 +1,16 @@
 from django.contrib import admin
-from .models import Boards, Comment, Reply
+from .models import Boards, Comment, Reply, Category
 
-
+@admin.register(Boards)
 class BoardsAdmin(admin.ModelAdmin):
     search_fields = ['title']
 
-admin.site.register(Boards, BoardsAdmin)
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    pass
 
-admin.site.register(Comment)
+@admin.register(Reply)
+class ReplyAdmin(admin.ModelAdmin):
+    pass
 
-admin.site.register(Reply)
+admin.site.register(Category)
