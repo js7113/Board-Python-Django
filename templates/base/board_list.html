@@ -56,7 +56,7 @@
                 <td class="text-center align-middle">
                     <a href="{% url 'base:detail' Boards.id %}">{{ Boards.title }}</a>
                     {% if Boards.comment_set.count > 0 %}
-                    <span class="text-danger small ml-2">{{ Boards.comment_set.count }}</span>
+                    <span class="text-danger small ml-2">{{ Boards.comment_set.count|add:Boards.reply_set.count }}</span>
                     {% endif %}
                 </td>
                 <td class="small align-middle">

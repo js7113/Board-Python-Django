@@ -16,7 +16,7 @@ class Boards(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_id_board')
     create_date = models.DateTimeField()
     modify_date = models.DateTimeField(null=True, blank=True)
-    voter = models.ManyToManyField(User, related_name='voter_board')
+    voter = models.ManyToManyField(User, related_name='voter_board', blank=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE, default='1')
     view_count = models.IntegerField(null=True, blank=True, default=0)
 
